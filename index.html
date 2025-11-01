@@ -8,158 +8,298 @@
   <meta name="author" content="EcoPerejil - Grupo 1, Colegio América" />
 
   <style>
-    /* --------- Variables y reset --------- */
-    :root{
-      --bg-1: #152b1a;         /* fondo verde oscuro */
-      --bg-2: #1d3b25;         /* tono ligeramente más claro para detalles */
-      --accent: #5faf68;
-      --muted: #a9c8a5;
-      --card: #203b25;
-      --glass: rgba(255,255,255,0.05);
-      --maxw: 1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
-      background: var(--bg-1);
-      color: #e6f5e6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-    }
+    :root {
+  --bg-1: #0f2414;
+  --accent: #a6ffad;
+  --muted: #c2e5c0;
+  --maxw: 1100px;
+}
 
-    /* --------- Layout --------- */
-    .wrap{max-width:var(--maxw); margin:32px auto; padding:28px; position:relative;}
-    header.site-header{
-      display:flex;align-items:center;gap:18px;padding:20px;border-radius:14px;
-      background: rgba(255,255,255,0.05);
-      box-shadow:0 6px 22px rgba(0,0,0,0.4);
-      backdrop-filter: blur(6px);
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .brand { display:flex;flex-direction:column; }
-    .logo { display:flex;align-items:center;gap:12px; }
-    .logo .mark {
-      width:64px;height:64px;border-radius:14px;
-      background:linear-gradient(135deg,#3a6041,#2c4d34);
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 6px 18px rgba(0,0,0,0.4);
-      font-weight:700;color:#9ce49c;font-size:24px;
-    }
-    .brand h1{margin:0;font-size:1.6rem;color:#74d17c;letter-spacing:0.6px}
-    .brand p{margin:0;color:var(--muted);font-size:0.95rem}
+body {
+  font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  background: var(--bg-1);
+  color: #e6f5e6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.45;
+}
 
-    /* --------- Hero / Card --------- */
-    .hero {
-      display:grid;grid-template-columns: 1fr 420px;gap:28px;margin-top:28px;align-items:center;
-    }
+/* ---- Encabezado ---- */
+header.site-header {
+  text-align: center;
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
 
-    .panel {
-      background: rgba(255,255,255,0.05);
-      border-radius:12px;padding:20px;margin-bottom:18px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      transform-origin:center;
-      opacity:0; transform: translateY(18px);
-      transition: all 700ms cubic-bezier(.2,.9,.3,1);
-    }
-    .panel.revealed{opacity:1; transform:none}
+.mark {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: none;
+}
 
-    .panel h2{color: #8bd68f;margin:8px 0 6px;font-size:1.15rem}
-    .panel p{color:#e1f1e1;margin:0 0 10px}
+.mark img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px #9fffaa);
+}
 
-    .badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .badge {
-      background: rgba(100,160,100,0.15);
-      color: #b8f5b8;
-      padding:6px 10px;border-radius:999px;font-size:0.85rem;
-      border:1px solid rgba(200,255,200,0.1)
-    }
+h1 {
+  font-size: 2.2rem;
+  color: #a6ffad;
+  text-shadow: 0 0 8px rgba(120,255,150,0.4), 0 0 18px rgba(120,255,150,0.3);
+  animation: softGlow 4s ease-in-out infinite alternate;
+}
 
-    /* --------- Right column - product card --------- */
-    .product-card {
-      border-radius:14px; overflow:hidden; position:relative;
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.4);
-      padding:18px; display:flex; flex-direction:column; align-items:center; gap:12px;
-    }
-    .product-photo {
-      width:320px;height:320px;border-radius:12px;overflow:hidden;
-      background-size:cover;background-position:center;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.4);
-      transition: transform 800ms cubic-bezier(.2,.9,.3,1);
-    }
-    .product-card:hover .product-photo{ transform: translateY(-8px) scale(1.02); }
-    .sku { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; color:#d2f2d2; font-weight:600; margin-top:8px }
+@keyframes softGlow {
+  0% { text-shadow: 0 0 6px rgba(120,255,150,0.3), 0 0 12px rgba(120,255,150,0.2); }
+  100% { text-shadow: 0 0 14px rgba(120,255,150,0.8), 0 0 28px rgba(120,255,150,0.5); }
+}
 
-    .meta { display:flex; gap:10px; justify-content:space-between; width:100% }
-    .meta .left{font-size:0.9rem;color:#b9d9b6}
-    .meta .right{font-size:0.85rem;color:#a9d3a5;text-align:right}
+.muted {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-top: 4px;
+  opacity: 0.9;
+}
 
-    /* --------- Hojas animadas --------- */
-    .leaves {
-      position:fixed; inset:0; pointer-events:none; z-index:-1;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(90,130,100,0.4), transparent 12%),
-        radial-gradient(circle at 90% 80%, rgba(80,110,80,0.5), transparent 15%);
-    }
-    .floating-leaf {
-      position:absolute; width:120px; height:120px; opacity:0.08; transform-origin:center;
-      will-change: transform;
-      animation: floatLeaf 8s ease-in-out infinite;
-    }
-    .floating-leaf.leaf-a{ left:6%; top:10%; animation-delay:0s }
-    .floating-leaf.leaf-b{ right:8%; top:18%; animation-delay:2s; transform:scale(0.85) }
-    .floating-leaf.leaf-c{ left:14%; bottom:6%; animation-delay:4s; transform:scale(1.1) }
+/* ---- Fondo con hojas ---- */
+.leaves {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
 
-    @keyframes floatLeaf {
-      0% { transform: translateY(0) rotate(0deg) }
-      50% { transform: translateY(-18px) rotate(6deg) }
-      100% { transform: translateY(0) rotate(-2deg) }
-    }
+.floating-leaf {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  opacity: 0.12;
+  transform-origin: center;
+  animation: floatLeaf 14s ease-in-out infinite, leafSway 6s ease-in-out infinite alternate;
+}
 
-    /* --------- Responsive --------- */
-    @media (max-width: 920px){
-      .hero{grid-template-columns:1fr; padding:0 12px}
-      .product-photo{width:260px;height:260px}
-      .wrap{padding:20px 12px}
-    }
-    @media (max-width: 520px){
-      .brand h1{font-size:1.2rem}
-      .product-photo{width:200px;height:200px}
-    }
+@keyframes floatLeaf {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(20px,-20px) rotate(10deg); }
+  100% { transform: translate(0,0) rotate(-8deg); }
+}
 
-    .sep { height:1px;background:rgba(255,255,255,0.1); margin:14px 0; border-radius:2px; }
-    footer.site-foot { text-align:center; margin-top:30px; padding:18px; color:#a9c8a5; font-size:0.95rem; }
+@keyframes leafSway {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(4deg) scale(1.05); }
+}
 
-    .muted{color:var(--muted)}
-    .center{display:flex;justify-content:center;align-items:center}
-    .page-entrance { animation: pageIn 900ms cubic-bezier(.2,.9,.25,1) both; }
-    @keyframes pageIn { from { opacity:0; transform: translateY(10px) } to { opacity:1; transform:none } }
+/* ---- Paneles ---- */
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 28px;
+  align-items: center;
+}
+
+.panel {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: all 700ms cubic-bezier(.2,.9,.3,1);
+}
+
+.panel.revealed { opacity: 1; transform: none; }
+
+.panel h2 {
+  color: #8bd68f;
+  margin: 8px 0 6px;
+  font-size: 1.15rem;
+}
+
+.panel p {
+  color: #e1f1e1;
+  margin: 0 0 10px;
+}
+
+.badge {
+  background: rgba(100,160,100,0.15);
+  color: #b8f5b8;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(200,255,200,0.1);
+}
+
+/* ---- Producto ---- */
+.product-card {
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.4);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-photo {
+  width: 320px;
+  height: 320px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.4);
+}
+
+.sku { font-family: ui-monospace; color: #d2f2d2; font-weight: 600; margin-top: 8px; }
+
+.meta {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.meta .left { font-size: 0.9rem; color: #b9d9b6; }
+.meta .right { font-size: 0.85rem; color: #a9d3a5; text-align: right; }
+
+/* ---- Footer ---- */
+footer.site-foot {
+  text-align: center;
+  margin-top: 30px;
+  padding: 18px;
+  color: #a9c8a5;
+  font-size: 0.95rem;
+}
+.leaf-a {
+  top: 15%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.leaf-b {
+  bottom: 10%;
+  right: 12%;
+  animation-delay: 3s;
+}
+
+.leaf-c {
+  top: 20%;
+  right: 30%;
+  animation-delay: 1.5s;
+}
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  z-index: -2;
+  background: radial-gradient(circle at center, rgba(180, 255, 190, 0.46), transparent 75%);
+  filter: blur(110px);
+}
+
+/* Luz superior izquierda (más esquinada) */
+body::before {
+  top: 15px;
+  left: 20px;
+}
+
+/* Luz inferior derecha (más esquinada) */
+body::after {
+  bottom: 15px;
+  right: 20px;
+}
   </style>
 </head>
 
-<body class="page-entrance">
+<body>
   <div class="leaves" aria-hidden="true">
-    <svg class="floating-leaf leaf-a" viewBox="0 0 200 200"><path d="M40 100 Q80 10 160 90 Q110 120 90 160 Q60 125 40 100Z" fill="#4d8d56"/></svg>
-    <svg class="floating-leaf leaf-b" viewBox="0 0 200 200"><path d="M20 120 Q60 20 150 70 Q110 110 90 150 Q40 130 20 120Z" fill="#6aa96f"/></svg>
-    <svg class="floating-leaf leaf-c" viewBox="0 0 200 200"><path d="M30 90 Q70 0 170 80 Q120 110 100 150 Q60 120 30 90Z" fill="#5e9f63"/></svg>
-  </div>
+  <!-- Hoja A -->
+  <svg class="floating-leaf leaf-a" viewBox="0 0 200 200">
+    <defs>
+      <radialGradient id="leafGradA" cx="50%" cy="50%" r="70%">
+        <stop offset="0%" stop-color="#b8f8b2"/>
+        <stop offset="70%" stop-color="#3e7f44"/>
+      </radialGradient>
+      <filter id="leafShadowA" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#1a3d1d" flood-opacity="0.4"/>
+      </filter>
+    </defs>
+    <path d="M100 20 C140 40,165 110,100 180 C35 110,60 40,100 20Z"
+          fill="url(#leafGradA)" filter="url(#leafShadowA)" stroke="#2b5c2f" stroke-width="1.2"/>
+    <!-- Línea central -->
+    <path d="M100 30 Q105 70,100 180" stroke="#2a5b2d" stroke-width="2" fill="none" opacity="0.8"/>
+    <!-- Ramificaciones -->
+    <path d="M100 80 Q80 90,70 110" stroke="#2a5b2d" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M100 100 Q120 115,130 140" stroke="#2a5b2d" stroke-width="1" fill="none" opacity="0.5"/>
+  </svg>
+
+  <!-- Hoja B -->
+  <svg class="floating-leaf leaf-b" viewBox="0 0 200 200">
+    <defs>
+      <radialGradient id="leafGradB" cx="45%" cy="40%" r="75%">
+        <stop offset="0%" stop-color="#c0ffc0"/>
+        <stop offset="80%" stop-color="#377a3d"/>
+      </radialGradient>
+      <filter id="leafShadowB" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#1a3d1d" flood-opacity="0.35"/>
+      </filter>
+    </defs>
+    <path d="M100 25 C135 55,160 110,100 175 C45 110,65 50,100 25Z"
+          fill="url(#leafGradB)" filter="url(#leafShadowB)" stroke="#2f6633" stroke-width="1.2"/>
+    <path d="M100 35 Q105 90,100 170" stroke="#2d5f31" stroke-width="2" fill="none" opacity="0.8"/>
+    <path d="M100 95 Q80 105,70 130" stroke="#2d5f31" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M100 120 Q120 135,130 155" stroke="#2d5f31" stroke-width="1" fill="none" opacity="0.5"/>
+  </svg>
+
+  <!-- Hoja C -->
+  <svg class="floating-leaf leaf-c" viewBox="0 0 200 200">
+    <defs>
+      <radialGradient id="leafGradC" cx="55%" cy="45%" r="80%">
+        <stop offset="0%" stop-color="#b5f2b2"/>
+        <stop offset="85%" stop-color="#316b36"/>
+      </radialGradient>
+      <filter id="leafShadowC" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#1a3d1d" flood-opacity="0.4"/>
+      </filter>
+    </defs>
+    <path d="M100 30 C150 60,170 130,100 180 C40 130,60 60,100 30Z"
+          fill="url(#leafGradC)" filter="url(#leafShadowC)" stroke="#2a5c2f" stroke-width="1.2"/>
+    <path d="M100 40 Q105 90,100 175" stroke="#2a5c2f" stroke-width="2" fill="none" opacity="0.8"/>
+    <path d="M100 100 Q80 110,65 130" stroke="#2a5c2f" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M100 120 Q120 135,135 150" stroke="#2a5c2f" stroke-width="1" fill="none" opacity="0.5"/>
+  </svg>
+</div>
+
+  <header class="site-header">
+    <div class="mark">
+      <img src="pngegg.png" alt="Hoja">
+    </div>
+    <h1>EcoPerejil</h1>
+    <p class="muted">Infusión natural — Hojas secas de perejil</p>
+  </header>
 
   <div class="wrap">
-    <header class="site-header">
-      <div class="logo">
-        <div class="mark">
-          <img src="pngegg.png" alt="Hoja" style="width:100%;height:100%;object-fit:contain;">
-        </div>
-      </div>
-      <div class="brand">
-        <h1>EcoPerejil</h1>
-        <p class="muted">Infusión natural — Hojas secas de perejil</p>
-      </div>
-    </header>
-
     <div class="hero">
       <div>
         <div class="panel" data-reveal>
@@ -180,8 +320,6 @@
         <div class="panel" data-reveal>
           <h2>🍵 Modo de preparación</h2>
           <p>Calienta agua hasta casi hervir (≈90°C). Coloca una bolsita o 1 cucharadita de hojas, deja reposar 4–6 minutos. Tomar con moderación y disfrutar.</p>
-          <div class="sep"></div>
-          <p class="muted" style="font-size:0.92rem">Consejo: prueba infusionar 1–2 minutos para un sabor ligero o más tiempo para mayor intensidad.</p>
         </div>
       </div>
 
@@ -221,6 +359,7 @@
   </script>
 </body>
 </html>
+
 
 
 
