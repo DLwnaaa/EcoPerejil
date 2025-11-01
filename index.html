@@ -10,12 +10,12 @@
   <style>
     /* --------- Variables y reset --------- */
     :root{
-      --bg-1: #f6f5ef;
-      --bg-2: #eef6ea;
-      --accent: #2e7d32;
-      --muted: #6b766e;
-      --card: #ffffff;
-      --glass: rgba(255,255,255,0.6);
+      --bg-1: #152b1a;         /* fondo verde oscuro */
+      --bg-2: #1d3b25;         /* tono ligeramente más claro para detalles */
+      --accent: #5faf68;
+      --muted: #a9c8a5;
+      --card: #203b25;
+      --glass: rgba(255,255,255,0.05);
       --maxw: 1100px;
     }
     *{box-sizing:border-box}
@@ -23,8 +23,8 @@
     body{
       margin:0;
       font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
-      background: radial-gradient(circle at 10% 10%, #f8fbf6, var(--bg-1));
-      color: #22332b;
+      background: var(--bg-1);
+      color: #e6f5e6;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       line-height:1.45;
@@ -32,19 +32,23 @@
 
     /* --------- Layout --------- */
     .wrap{max-width:var(--maxw); margin:32px auto; padding:28px; position:relative;}
-    header.site-header{display:flex;align-items:center;gap:18px;padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(46,125,50,0.06), rgba(255,255,255,0.25));box-shadow:0 6px 22px rgba(14, 26, 18, 0.06);backdrop-filter: blur(4px);}
+    header.site-header{
+      display:flex;align-items:center;gap:18px;padding:20px;border-radius:14px;
+      background: rgba(255,255,255,0.05);
+      box-shadow:0 6px 22px rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+    }
 
-    .brand {
-      display:flex;flex-direction:column;
-    }
-    .logo {
-      display:flex;align-items:center;gap:12px;
-    }
+    .brand { display:flex;flex-direction:column; }
+    .logo { display:flex;align-items:center;gap:12px; }
     .logo .mark {
-      width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#dff4df,#bde7b0);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(30,90,40,0.08);
-      font-weight:700;color:var(--accent);font-size:24px;
+      width:64px;height:64px;border-radius:14px;
+      background:linear-gradient(135deg,#3a6041,#2c4d34);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.4);
+      font-weight:700;color:#9ce49c;font-size:24px;
     }
-    .brand h1{margin:0;font-size:1.6rem;color:var(--accent);letter-spacing:0.6px}
+    .brand h1{margin:0;font-size:1.6rem;color:#74d17c;letter-spacing:0.6px}
     .brand p{margin:0;color:var(--muted);font-size:0.95rem}
 
     /* --------- Hero / Card --------- */
@@ -52,45 +56,53 @@
       display:grid;grid-template-columns: 1fr 420px;gap:28px;margin-top:28px;align-items:center;
     }
 
-    /* Left column - content panels */
     .panel {
-      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));
-      border-radius:12px;padding:20px;margin-bottom:18px;box-shadow: 0 8px 24px rgba(18, 36, 20, 0.04);
-      transform-origin:center; will-change: transform, opacity;
-      opacity:0; transform: translateY(18px); transition: all 700ms cubic-bezier(.2,.9,.3,1);
+      background: rgba(255,255,255,0.05);
+      border-radius:12px;padding:20px;margin-bottom:18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transform-origin:center;
+      opacity:0; transform: translateY(18px);
+      transition: all 700ms cubic-bezier(.2,.9,.3,1);
     }
     .panel.revealed{opacity:1; transform:none}
 
-    .panel h2{color: #245f37;margin:8px 0 6px;font-size:1.15rem}
-    .panel p{color:#344d3d;margin:0 0 10px}
+    .panel h2{color: #8bd68f;margin:8px 0 6px;font-size:1.15rem}
+    .panel p{color:#e1f1e1;margin:0 0 10px}
 
     .badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .badge {background: #f1fbef; color: #2e7d32; padding:6px 10px;border-radius:999px;font-size:0.85rem;border:1px solid rgba(46,125,50,0.06)}
+    .badge {
+      background: rgba(100,160,100,0.15);
+      color: #b8f5b8;
+      padding:6px 10px;border-radius:999px;font-size:0.85rem;
+      border:1px solid rgba(200,255,200,0.1)
+    }
 
-    /* Right column - product card */
+    /* --------- Right column - product card --------- */
     .product-card {
       border-radius:14px; overflow:hidden; position:relative;
-      background: linear-gradient(180deg,#ffffff,#f6faf4);
-      box-shadow: 0 18px 50px rgba(12,30,12,0.08);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.4);
       padding:18px; display:flex; flex-direction:column; align-items:center; gap:12px;
     }
     .product-photo {
-      width:320px;height:320px;border-radius:12px;overflow:hidden;background-size:cover;background-position:center;
-      box-shadow: 0 14px 40px rgba(10,30,10,0.08);
+      width:320px;height:320px;border-radius:12px;overflow:hidden;
+      background-size:cover;background-position:center;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.4);
       transition: transform 800ms cubic-bezier(.2,.9,.3,1);
     }
     .product-card:hover .product-photo{ transform: translateY(-8px) scale(1.02); }
-    .sku { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; color:#22332b; font-weight:600; margin-top:8px }
+    .sku { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; color:#d2f2d2; font-weight:600; margin-top:8px }
 
     .meta { display:flex; gap:10px; justify-content:space-between; width:100% }
-    .meta .left{font-size:0.9rem;color:var(--muted)} .meta .right{font-size:0.85rem;color:#4b6b53;text-align:right}
+    .meta .left{font-size:0.9rem;color:#b9d9b6}
+    .meta .right{font-size:0.85rem;color:#a9d3a5;text-align:right}
 
-    /* --------- Decorative animated leaves (SVG layers) --------- */
+    /* --------- Hojas animadas --------- */
     .leaves {
       position:fixed; inset:0; pointer-events:none; z-index:-1;
       background-image:
-        radial-gradient(circle at 10% 20%, rgba(200,240,210,0.6), transparent 12%),
-        radial-gradient(circle at 90% 80%, rgba(230,250,235,0.7), transparent 15%);
+        radial-gradient(circle at 10% 20%, rgba(90,130,100,0.4), transparent 12%),
+        radial-gradient(circle at 90% 80%, rgba(80,110,80,0.5), transparent 15%);
     }
     .floating-leaf {
       position:absolute; width:120px; height:120px; opacity:0.08; transform-origin:center;
@@ -107,7 +119,7 @@
       100% { transform: translateY(0) rotate(-2deg) }
     }
 
-    /* --------- Scroll reveal helper and responsive --------- */
+    /* --------- Responsive --------- */
     @media (max-width: 920px){
       .hero{grid-template-columns:1fr; padding:0 12px}
       .product-photo{width:260px;height:260px}
@@ -118,36 +130,29 @@
       .product-photo{width:200px;height:200px}
     }
 
-    /* subtle content separators */
-    .sep { height:1px;background:linear-gradient(90deg,transparent,#e9efe6,transparent); margin:14px 0; border-radius:2px; }
+    .sep { height:1px;background:rgba(255,255,255,0.1); margin:14px 0; border-radius:2px; }
+    footer.site-foot { text-align:center; margin-top:30px; padding:18px; color:#a9c8a5; font-size:0.95rem; }
 
-    /* Footer */
-    footer.site-foot { text-align:center; margin-top:30px; padding:18px; color:var(--muted); font-size:0.95rem; }
-
-    /* small helpers */
     .muted{color:var(--muted)}
     .center{display:flex;justify-content:center;align-items:center}
-
-    /* subtle entrance for page */
     .page-entrance { animation: pageIn 900ms cubic-bezier(.2,.9,.25,1) both; }
     @keyframes pageIn { from { opacity:0; transform: translateY(10px) } to { opacity:1; transform:none } }
   </style>
 </head>
-<body class="page-entrance">
 
-  <!-- Animated decorative leaves behind content -->
+<body class="page-entrance">
   <div class="leaves" aria-hidden="true">
-    <svg class="floating-leaf leaf-a" viewBox="0 0 200 200"><path d="M40 100 Q80 10 160 90 Q110 120 90 160 Q60 125 40 100Z" fill="#bfeec7"/></svg>
-    <svg class="floating-leaf leaf-b" viewBox="0 0 200 200"><path d="M20 120 Q60 20 150 70 Q110 110 90 150 Q40 130 20 120Z" fill="#dff7df"/></svg>
-    <svg class="floating-leaf leaf-c" viewBox="0 0 200 200"><path d="M30 90 Q70 0 170 80 Q120 110 100 150 Q60 120 30 90Z" fill="#cfeec9"/></svg>
+    <svg class="floating-leaf leaf-a" viewBox="0 0 200 200"><path d="M40 100 Q80 10 160 90 Q110 120 90 160 Q60 125 40 100Z" fill="#4d8d56"/></svg>
+    <svg class="floating-leaf leaf-b" viewBox="0 0 200 200"><path d="M20 120 Q60 20 150 70 Q110 110 90 150 Q40 130 20 120Z" fill="#6aa96f"/></svg>
+    <svg class="floating-leaf leaf-c" viewBox="0 0 200 200"><path d="M30 90 Q70 0 170 80 Q120 110 100 150 Q60 120 30 90Z" fill="#5e9f63"/></svg>
   </div>
 
-  <div class="wrap" role="main">
-    <header class="site-header" aria-label="Encabezado EcoPerejil">
+  <div class="wrap">
+    <header class="site-header">
       <div class="logo">
-        <div class="mark" aria-hidden="true">
-  <img src="pngegg.png" alt="Hoja" style="width:100%;height:100%;object-fit:contain;">
-</div>
+        <div class="mark">
+          <img src="pngegg.png" alt="Hoja" style="width:100%;height:100%;object-fit:contain;">
+        </div>
       </div>
       <div class="brand">
         <h1>EcoPerejil</h1>
@@ -155,8 +160,7 @@
       </div>
     </header>
 
-    <div class="hero" aria-hidden="false" >
-      <!-- Left: info panels -->
+    <div class="hero">
       <div>
         <div class="panel" data-reveal>
           <h2>🌿 Sobre EcoPerejil</h2>
@@ -181,98 +185,43 @@
         </div>
       </div>
 
-      <!-- Right: product visual -->
-      <aside class="product-card" aria-label="Imagen del producto">
-        <!-- product photo: usando imágenes libres de Unsplash para posteridad -->
-        <div id="photo" class="product-photo" role="img" aria-label="Imagen ilustrativa de la caja de EcoPerejil"></div>
-
+      <aside class="product-card">
+        <div id="photo" class="product-photo"></div>
         <div class="sku">EAN-13 &nbsp; 750123456789</div>
         <div class="meta">
           <div class="left">
             <strong>20 bolsitas</strong><div class="muted">Hecho con hojas secas</div>
           </div>
-          <div class="right">
-            Lote: 001<br>Exp: 10/2026
-          </div>
+          <div class="right">Lote: 001<br>Exp: 10/2026</div>
         </div>
       </aside>
     </div>
 
-    <footer class="site-foot" role="contentinfo">
-      Proyecto escolar – Grupo 1, Colegio América
-    </footer>
+    <footer class="site-foot">Proyecto escolar – Grupo 1, Colegio América</footer>
   </div>
 
-  <!-- ------- AUDIO (ambient) ------- -->
-  <!-- Intentamos autoplay en loop. Si el navegador lo bloquea, lamentablemente es por política del navegador. -->
-  <audio id="bg-audio" autoplay loop preload="auto">
-    <!-- Fuente de ejemplo (royalty-free). Si quieres usar otra música, reemplaza el src abajo. -->
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_63c6a9b1a7.mp3?filename=soft-ambient-10987.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-  </audio>
-
   <script>
-    /* ---------- SCRIPT: carga de imagenes, scroll reveal y parallax ---------- */
-
-    // Elegir imágenes libres desde Unsplash (no necesitas subir nada).
-    // Estas URLs usan parámetros para tema y tamaño; si GitHub Pages muestra bloqueo CORS, puedes cambiarlas por tus propias imágenes.
-    const productImages = [
-  "2a.png"
-];
-
-    // Seleccionar aleatoria para darle dinamismo
+    const productImages = ["2a.png"];
     const photoEl = document.getElementById('photo');
     const selected = productImages[Math.floor(Math.random()*productImages.length)];
     photoEl.style.backgroundImage = `url('${selected}')`;
 
-    // Simple parallax / tilt based on mouse movement for the product photo (subtle)
     (function(){
-      const card = document.querySelector('.product-card');
-      const photo = document.querySelector('.product-photo');
-
-      card.addEventListener('mousemove', (e)=>{
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        photo.style.transform = `translateY(${ -y * 10 }px) rotateX(${ y * 3 }deg) rotateY(${ x * 3 }deg) scale(1.01)`;
-      });
-      card.addEventListener('mouseleave', ()=>{
-        photo.style.transform = '';
-      });
-    })();
-
-    // Scroll reveal panels
-    (function(){
-      const els = document.querySelectorAll('[data-reveal]');
-      const io = new IntersectionObserver((entries)=>{
+      const els=document.querySelectorAll('[data-reveal]');
+      const io=new IntersectionObserver(entries=>{
         entries.forEach(entry=>{
           if(entry.isIntersecting){
             entry.target.classList.add('revealed');
             io.unobserve(entry.target);
           }
         });
-      }, {threshold: 0.18});
+      },{threshold:0.18});
       els.forEach(el=>io.observe(el));
     })();
-
-    // Try to force audio to play (some browsers block autoplay without gesture)
-    (function(){
-      const audio = document.getElementById('bg-audio');
-      function tryPlay(){
-        audio.play().catch(()=>{/* autoplay blocked */});
-      }
-      // attempt after small delay
-      setTimeout(tryPlay, 600);
-      // also try on first user interaction (if blocked)
-      ['click','touchstart','keydown'].forEach(ev => {
-        window.addEventListener(ev, tryPlay, {once:true});
-      });
-    })();
-
-    // Accessibility: add alt text to product photo role via aria-label already set.
   </script>
 </body>
 </html>
+
 
 
 
