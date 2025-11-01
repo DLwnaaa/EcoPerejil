@@ -180,7 +180,14 @@ h1 {
   box-shadow: 0 14px 40px rgba(0,0,0,0.4);
 }
 
-.sku { font-family: ui-monospace; color: #d2f2d2; font-weight: 600; margin-top: 8px; }
+.sku {
+  font-family: ui-monospace;
+  color: #d2f2d2 !important;
+  font-weight: 600;
+  margin-top: 8px;
+  text-decoration: none !important;
+  pointer-events: none;
+}
 
 .meta {
   display: flex;
@@ -436,6 +443,7 @@ body::after {
   </script>
 </body>
 </html>
+
 
 
 
